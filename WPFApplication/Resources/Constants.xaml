@@ -1,0 +1,7 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!-- Path to the file being monitored -->
+    <!-- Example taken from https://www.reddit.com/r/AskReddit.json -->
+    <sys:String x:Key="DataFilePath">./ChangeableData.json</sys:String>
+</ResourceDictionary>

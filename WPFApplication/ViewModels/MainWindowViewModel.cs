@@ -35,10 +35,5 @@ namespace WPFApplication.ViewModels
             _jsonMonitor.ForceCheck();
             UpdateData();
         }
-
-        private void PopulateData()
-        {
-            
-        }
     }
 }

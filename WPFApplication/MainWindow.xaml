@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFApplication"
-        xmlns:viewModel="clr-namespace:WPFApplication.ViewModels"
+        xmlns:cvr="clr-namespace:WPFApplication.Converters"
         xmlns:model="clr-namespace:WPFApplication.Models"
         xmlns:core="clr-namespace:WPFApplication.Core"
         mc:Ignorable="d"
@@ -12,6 +12,9 @@
         Title="JSON Monitor"
         Height="450"
         Width="800">
+    <Window.Resources>
+        <cvr:JsonNodeStringConverter x:Key="JsonNodeStringConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -31,10 +34,16 @@
                     <HierarchicalDataTemplate DataType="{x:Type model:JsonNodeTree}"
                                               ItemsSource="{Binding Branches}">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding PropertyName, StringFormat={}{0}:}"
-                                       FontStyle="Italic"/>
-                            <TextBlock Text="{Binding Value, StringFormat={} {0}}"
+                            <TextBlock Text="{Binding .,
+                                StringFormat={}{0}:,
+                                Converter={StaticResource JsonNodeStringConverter},
+                                ConverterParameter=PROPERTY}"
                                        FontWeight="Bold"/>
+                            <TextBlock Text="{Binding .,
+                                StringFormat={} {0},
+                                Converter={StaticResource JsonNodeStringConverter},
+                                ConverterParameter=VALUE}"
+                                       FontStyle="Italic"/>
                         </StackPanel>
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>

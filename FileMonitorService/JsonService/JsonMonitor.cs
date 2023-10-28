@@ -6,6 +6,9 @@ namespace FileMonitorService.JsonService
     {
         private const int DEFAULT_MILLISECONDS = 2000;
 
+        private Task? _monitorTask;
+        private CancellationTokenSource _cancellationTokenSource;
+        private CancellationToken _cancellationToken;
         private PeriodicTimer _timer;
         private FileSystemWatcher _watcher;
         private bool _disposedValue;
@@ -21,6 +24,8 @@ namespace FileMonitorService.JsonService
             FilePath = path;
             Data = new JsonNodeTree();
             _timer = new PeriodicTimer(TimeSpan.FromMilliseconds(DEFAULT_MILLISECONDS));
+            _cancellationTokenSource = new CancellationTokenSource();
+            _cancellationToken = _cancellationTokenSource.Token;
 
             _watcher = new FileSystemWatcher();
             _watcher.Path = Path.GetDirectoryName(path)!;
@@ -31,16 +36,26 @@ namespace FileMonitorService.JsonService
 
         public void StartMonitoring()
         {
-            Data = RetrieveData();
+            if(_cancellationToken.IsCancellationRequested)
+            {
+                _cancellationTokenSource.Dispose();
+                _cancellationTokenSource = new CancellationTokenSource();
+                _cancellationToken = _cancellationTokenSource.Token;
+            }
 
-            _watcher.Changed += OnFileChanged;
+            if(_monitorTask == null || _monitorTask.IsCanceled)
+            {
+                Data = RetrieveData();
 
-            RepeatForEver();
+                _watcher.Changed += OnFileChanged;
+                _monitorTask = RepeatForEver();
+            }
         }
 
         public void StopMonitoring()
         {
             _watcher.Changed -= OnFileChanged;
+            _cancellationTokenSource.Cancel();
         }
 
         public bool ForceCheck()
@@ -160,9 +175,9 @@ namespace FileMonitorService.JsonService
             return mainNode;
         }
 
-        private async void RepeatForEver()
+        private async Task RepeatForEver()
         {
-            while (await _timer.WaitForNextTickAsync())
+            while (await _timer.WaitForNextTickAsync(_cancellationToken))
             {
                 if (!_fileChanged)
                 {
@@ -170,8 +185,8 @@ namespace FileMonitorService.JsonService
                     continue;
                 }
 
-                bool isChecked = ForceCheck();
-                DataChecked?.Invoke(this, isChecked);
+                bool changed = ForceCheck();
+                DataChecked?.Invoke(this, changed);
             }
         }
 
@@ -191,6 +206,7 @@ namespace FileMonitorService.JsonService
                 if (disposing)
                 {
                     // Ddispose managed state (managed objects)
+                    _cancellationTokenSource.Dispose();
                     _timer.Dispose();
                     _watcher.Dispose();
                 }

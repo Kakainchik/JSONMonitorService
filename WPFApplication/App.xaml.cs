@@ -45,9 +45,9 @@ namespace WPFApplication
 
         protected override void OnExit(ExitEventArgs e)
         {
-            ServiceProvider.Dispose();
             _jsonMonitor?.StopMonitoring();
             _jsonMonitor?.Dispose();
+            ServiceProvider.Dispose();
             base.OnExit(e);
         }
     }

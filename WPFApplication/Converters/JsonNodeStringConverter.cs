@@ -1,7 +1,7 @@
-﻿using System;
+﻿using FileMonitorService.JsonService;
+using System;
 using System.Globalization;
 using System.Windows.Data;
-using WPFApplication.Models;
 
 namespace WPFApplication.Converters
 {

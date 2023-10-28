@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFApplication", "WPFApplication\WPFApplication.csproj", "{B088AE73-0689-486C-A3C8-7CAAB10BBE2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFApplication", "WPFApplication\WPFApplication.csproj", "{B088AE73-0689-486C-A3C8-7CAAB10BBE2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileMonitorService", "FileMonitorService\FileMonitorService.csproj", "{84A09CA9-60FF-4922-852B-8D7783909333}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{B088AE73-0689-486C-A3C8-7CAAB10BBE2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B088AE73-0689-486C-A3C8-7CAAB10BBE2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B088AE73-0689-486C-A3C8-7CAAB10BBE2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84A09CA9-60FF-4922-852B-8D7783909333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84A09CA9-60FF-4922-852B-8D7783909333}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84A09CA9-60FF-4922-852B-8D7783909333}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84A09CA9-60FF-4922-852B-8D7783909333}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

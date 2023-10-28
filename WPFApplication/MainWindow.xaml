@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFApplication"
         xmlns:cvr="clr-namespace:WPFApplication.Converters"
-        xmlns:model="clr-namespace:WPFApplication.Models"
-        xmlns:core="clr-namespace:WPFApplication.Core"
+        xmlns:model="clr-namespace:FileMonitorService;assembly=FileMonitorService"
         mc:Ignorable="d"
         DataContext="{Binding Source={StaticResource Locator}, Path=MainWindowVM}"
         Title="JSON Monitor"
@@ -26,37 +25,58 @@
         </Grid.ColumnDefinitions>
         
         <!-- Populating JSON data -->
-        <ScrollViewer Grid.Row="0"
-                      Grid.ColumnSpan="2"
-                      Padding="5">
-            <TreeView ItemsSource="{Binding View}">
-                <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate DataType="{x:Type model:JsonNodeTree}"
-                                              ItemsSource="{Binding Branches}">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding .,
-                                StringFormat={}{0}:,
-                                Converter={StaticResource JsonNodeStringConverter},
-                                ConverterParameter=PROPERTY}"
-                                       FontWeight="Bold"/>
-                            <TextBlock Text="{Binding .,
-                                StringFormat={} {0},
-                                Converter={StaticResource JsonNodeStringConverter},
-                                ConverterParameter=VALUE}"
-                                       FontStyle="Italic"/>
-                        </StackPanel>
-                    </HierarchicalDataTemplate>
-                </TreeView.ItemTemplate>
-            </TreeView>
-        </ScrollViewer>
-        
+        <TreeView Grid.Row="0"
+                  Grid.ColumnSpan="2"
+                  Padding="5"
+                  ItemsSource="{Binding View}">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate DataType="{x:Type model:JsonNodeTree}"
+                                          ItemsSource="{Binding Branches}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding .,
+                                        StringFormat={}{0}:,
+                                        Converter={StaticResource JsonNodeStringConverter},
+                                        ConverterParameter=PROPERTY}"
+                                   FontWeight="Bold"/>
+                        <TextBlock Text="{Binding .,
+                                        StringFormat={} {0},
+                                        Converter={StaticResource JsonNodeStringConverter},
+                                        ConverterParameter=VALUE}"
+                                   FontStyle="Italic"/>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+
         <!-- Comments block -->
-        <TextBlock Grid.Row="1"
-                   Grid.Column="0"
-                   Margin="5"
-                   TextAlignment="Left"
-                   VerticalAlignment="Center"
-                   Text="Changes found"/>
+        <StackPanel Grid.Row="1"
+                    Grid.Column="0"
+                    VerticalAlignment="Center">
+            <TextBlock Margin="5"
+                       TextAlignment="Center"
+                       FontWeight="Bold"
+                       d:Text="Changes not found">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsDataChanged}" Value="True">
+                                <Setter Property="Text" Value="Changes found"/>
+                                <Setter Property="Foreground" Value="Red"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsDataChanged}" Value="False">
+                                <Setter Property="Text" Value="Changes not found"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+
+            <TextBlock Text="{Binding StringFormat=Number of check: {0},
+                            Path=CheckCount}"
+                       TextAlignment="Center"
+                       FontWeight="Bold"/>
+        </StackPanel>
 
         <!-- Force check button -->
         <Button Grid.Row="1"

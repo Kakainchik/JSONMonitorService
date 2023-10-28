@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FileMonitorService.JsonService;
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 using WPFApplication.ViewModels;
 

@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace WPFApplication.Models
+﻿namespace FileMonitorService.JsonService
 {
     public class JsonNodeTree
     {
@@ -17,7 +14,7 @@ namespace WPFApplication.Models
 
         public override bool Equals(object? obj)
         {
-            if(obj == null || !this.GetType().Equals(obj.GetType()))
+            if (obj == null || !GetType().Equals(obj.GetType()))
                 return false;
             else
             {
@@ -28,7 +25,7 @@ namespace WPFApplication.Models
                     && IsArray == other.IsArray
                     && IsComplex == other.IsComplex
                     && ArrayIndex == other.ArrayIndex;
-                return sameProperties && this.Branches.SequenceEqual(other.Branches);
+                return sameProperties && Branches.SequenceEqual(other.Branches);
             }
         }
 

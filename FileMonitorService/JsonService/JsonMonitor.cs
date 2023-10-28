@@ -66,13 +66,13 @@ namespace FileMonitorService.JsonService
 
             //Check for changes if any
             bool changed = !Data.Equals(newData);
-            if (changed)
+            if(changed)
                 Data = newData;
 
             return changed;
         }
 
-        public JsonNodeTree RetrieveData()
+        private JsonNodeTree RetrieveData()
         {
             JsonNodeTree mainNode = new JsonNodeTree()
             {
@@ -169,6 +169,7 @@ namespace FileMonitorService.JsonService
             }
             catch (Exception ex)
             {
+                //TODO: Add the exception handler to the WPF view if need
                 throw new InvalidDataException("The JSON is corrupted to be parsed.", ex);
             }
 

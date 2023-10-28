@@ -19,8 +19,8 @@
             else
             {
                 JsonNodeTree other = (JsonNodeTree)obj;
-                bool sameProperties = PropertyName == other.PropertyName
-                    && Value == null && other.Value == null ? true : Value?.Equals(other.Value) ?? false
+                bool sameProperties = string.Equals(PropertyName, other.PropertyName)
+                    && object.Equals(Value, other.Value)
                     && IsMainRoot == other.IsMainRoot
                     && IsArray == other.IsArray
                     && IsComplex == other.IsComplex

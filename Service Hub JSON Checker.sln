@@ -5,7 +5,9 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFApplication", "WPFApplication\WPFApplication.csproj", "{B088AE73-0689-486C-A3C8-7CAAB10BBE2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileMonitorService", "FileMonitorService\FileMonitorService.csproj", "{84A09CA9-60FF-4922-852B-8D7783909333}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileMonitorService", "FileMonitorService\FileMonitorService.csproj", "{84A09CA9-60FF-4922-852B-8D7783909333}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileMonitorServiceTest", "FileMonitorServiceTest\FileMonitorServiceTest.csproj", "{15F4B5BB-DA06-4323-AC1E-FFA8193DFC2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{84A09CA9-60FF-4922-852B-8D7783909333}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84A09CA9-60FF-4922-852B-8D7783909333}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84A09CA9-60FF-4922-852B-8D7783909333}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15F4B5BB-DA06-4323-AC1E-FFA8193DFC2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15F4B5BB-DA06-4323-AC1E-FFA8193DFC2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15F4B5BB-DA06-4323-AC1E-FFA8193DFC2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15F4B5BB-DA06-4323-AC1E-FFA8193DFC2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

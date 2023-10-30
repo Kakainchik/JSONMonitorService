@@ -1,15 +1,15 @@
-﻿using FileMonitorService.JsonService;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Input;
+using FileMonitorService.JsonService;
 using WPFApplication.Core;
 
 namespace WPFApplication.ViewModels
 {
     public class MainWindowViewModel : ObservableObject
     {
-        private static int _checkCount = 0;
+        private static int s_checkCount = 0;
 
         private IJsonMonitor _jsonMonitor;
         private bool _isDataChanged;
@@ -20,10 +20,10 @@ namespace WPFApplication.ViewModels
 
         public int CheckCount
         {
-            get => _checkCount;
+            get => s_checkCount;
             set
             {
-                _checkCount = value;
+                s_checkCount = value;
                 OnPropertyChanged(nameof(CheckCount));
             }
         }

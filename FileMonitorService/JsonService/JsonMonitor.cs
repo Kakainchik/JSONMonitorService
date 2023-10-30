@@ -17,8 +17,6 @@ namespace FileMonitorService.JsonService
         public string FilePath { get; private set; }
         public JsonNodeTree Data { get; private set; }
 
-        public event EventHandler<bool>? DataChecked;
-
         public JsonMonitor(string path)
         {
             FilePath = path;
@@ -33,6 +31,8 @@ namespace FileMonitorService.JsonService
             _watcher.NotifyFilter = NotifyFilters.LastWrite;
             _watcher.EnableRaisingEvents = true;
         }
+
+        public event EventHandler<bool>? DataChecked;
 
         public void StartMonitoring()
         {
